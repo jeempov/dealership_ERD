@@ -1,7 +1,7 @@
 -- customer stored function
 create or replace function add_customer(
 	_customer_id INTEGER, 
-	_first_name varchar, 
+	_first_name VARCHAR, 
 	_last_name VARCHAR, 
 	_phone_number NUMERIC,
 	_email VARCHAR
@@ -10,7 +10,7 @@ returns void
 as $MAIN$
 begin 
 	insert into customer(customer_id, first_name, last_name, phone_number, email)
-	VALUES(_customer_id, _first_name, _last_name, _phone_number);
+	VALUES(_customer_id, _first_name, _last_name, _phone_number, _email);
 end;
 $MAIN$
 language plpgsql;
@@ -30,7 +30,7 @@ returns void
 as $MAIN$
 begin 
 	insert into salesperson(salesperson_id, first_name, last_name, phone_number, email)
-	VALUES(_salesperson_id, _first_name, _last_name, _phone_number);
+	VALUES(_salesperson_id, _first_name, _last_name, _phone_number, _email);
 end;
 $MAIN$
 language plpgsql;
@@ -121,12 +121,14 @@ insert into invoice(
 	2
 );
 
+select * from invoice;
+
 -- service_ticket insert
 insert into service_ticket(
 	ticket_id,
 	cost,
 	serial_number,
-	customer_id,
+	customer_id
 )VALUES(
 	1,
 	5000.00,
@@ -138,7 +140,7 @@ insert into service_ticket(
 	ticket_id,
 	cost,
 	serial_number,
-	customer_id,
+	customer_id
 )VALUES(
 	2,
 	7000.00,
@@ -177,13 +179,6 @@ insert into service_history(
 
 
 -- part table insert
-create table part(
-	part_id SERIAL PRIMARY key,
-	description VARCHAR(350),
-	ticket_id INTEGER,
-	foreign key(ticket_id) references service_ticket(ticket_id)
-);
-
 insert into part(
 	part_id,
 	description,

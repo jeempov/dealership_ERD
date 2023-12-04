@@ -1,5 +1,5 @@
 -- customer table creation
-create table (customer
+create table customer(
 	customer_id SERIAL primary key,
 	first_name VARCHAR(150),
 	last_name VARCHAR(150),
@@ -44,7 +44,7 @@ create table invoice(
 	salesperson_id INTEGER NOT NULL,
 	foreign key(serial_number) references vehicle(serial_number),
 	foreign key(customer_id) references customer(customer_id),
-	foreign key(salesperson_id) references salsesperson(salesperson_id)
+	foreign key(salesperson_id) references salesperson(salesperson_id)
 );
 
 -- service_ticket table creation
